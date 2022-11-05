@@ -1,0 +1,39 @@
+{
+  "name": "vite-plugin-unstringify",
+  "version": "0.1.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "dev": "unbuild --stub",
+    "build": "rimraf dist && unbuild",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest",
+    "format": "prettier --write .",
+    "lint": "eslint --fix .",
+    "bump": "bump --commit --tag --push"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "@jsdevtools/version-bump-prompt": "^6.1.0",
+    "@typescript-eslint/eslint-plugin": "^5.36.1",
+    "@typescript-eslint/parser": "^5.36.1",
+    "eslint": "^8.23.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.7.1",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.8.2",
+    "unbuild": "^0.8.9",
+    "vite": "^3.0.9",
+    "vitest": "^0.22.1"
+  },
+  "packageManager": "pnpm@7.9.0"
+}
