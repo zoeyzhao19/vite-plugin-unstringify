@@ -9,8 +9,8 @@ export default function unstringify(dataKey: string): Plugin {
     name: 'vite-plugin-unstringify',
     enforce: 'pre',
     transform(code, id) {
-      const s = new MagicString(code);
       if (id.endsWith('vue')) {
+        const s = new MagicString(code);
         const matches = vueKeyRe.exec(code);
         if (matches && matches[1]) {
           s.overwrite(
@@ -26,6 +26,7 @@ export default function unstringify(dataKey: string): Plugin {
           map: s.generateMap(),
         };
       } else if (id.endsWith('jsx') || id.endsWith('tsx')) {
+        const s = new MagicString(code);
         const matches = jsxKeyEe.exec(code);
         if (matches && matches[1]) {
           s.overwrite(
