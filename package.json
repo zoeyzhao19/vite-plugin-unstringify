@@ -1,7 +1,7 @@
 {
   "name": "vite-plugin-unstringify",
-  "version": "0.1.0",
-  "description": "",
+  "version": "0.1.0-alpha",
+  "description": "auto unstringify dom data-*",
   "private": true,
   "scripts": {
     "dev": "unbuild --stub",

@@ -1,2 +1,7 @@
-export const one = 1;
-export const two = 2;
+import type { Plugin } from 'vite';
+
+export function unstringify(datakey: string): Plugin {
+  return {
+    name: 'vite-plugin-unstringify',
+  };
+}
