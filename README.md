@@ -1,1 +1,1 @@
-### Auto stringify DOM attribute data-\*
+### Auto stringify DOM attribute `data-\*` or other dom attributes

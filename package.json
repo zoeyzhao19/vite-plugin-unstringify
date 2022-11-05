@@ -1,7 +1,7 @@
 {
   "name": "vite-plugin-unstringify",
   "version": "0.3.1",
-  "description": "auto unstringify dom data-*",
+  "description": "auto unstringify dom data-* or other dom attributes",
   "repository": {
     "type": "git",
     "url": "https://github.com/zoeyzhao19/vite-plugin-unstringify"
@@ -16,7 +16,9 @@
     "lint": "eslint --fix .",
     "bump": "bump --commit --tag --push"
   },
-  "keywords": [],
+  "keywords": [
+    "auto unstringify dom data-* or other dom attributes"
+  ],
   "author": "",
   "license": "ISC",
   "main": "./dist/index.mjs",
