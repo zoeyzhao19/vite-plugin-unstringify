@@ -1,7 +1,7 @@
-import type { Plugin } from 'vite';
+// import type { Plugin } from 'vite';
 
-export function unstringify(datakey: string): Plugin {
-  return {
-    name: 'vite-plugin-unstringify',
-  };
-}
+// export function unstringify(datakey: string): Plugin {
+//   return {
+//     name: 'vite-plugin-unstringify',
+//   };
+// }

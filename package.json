@@ -1,8 +1,12 @@
 {
   "name": "vite-plugin-unstringify",
-  "version": "0.1.0-alpha",
+  "version": "0.1.1-alpha",
   "description": "auto unstringify dom data-*",
-  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zoeyzhao19/vite-plugin-unstringify"
+  },
+  "homepage": "https://github.com/zoeyzhao19/vite-plugin-unstringify#readme",
   "scripts": {
     "dev": "unbuild --stub",
     "build": "rimraf dist && unbuild",

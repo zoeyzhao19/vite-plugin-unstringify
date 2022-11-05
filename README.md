@@ -1,1 +1,1 @@
-### Inspired by [antfu](https://github.com/antfu/starter-ts)
+### Auto stringify DOM attribute data-\*
