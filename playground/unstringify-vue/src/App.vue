@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import TestTsx from './test';
+</script>
 
 <template>
   <div
@@ -10,6 +12,7 @@
     }"
   >
     Data stringify map
+    <TestTsx></TestTsx>
   </div>
 </template>
 
