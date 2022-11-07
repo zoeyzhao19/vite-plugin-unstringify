@@ -1,15 +1,13 @@
 <template>
-  <div :data-dddd="{
-    type: 'clickAndSpm',
-    event_type: 'click',
-    block_desc: 'articleLibrarySearch',
-    button_desc: 'enter_btn',
+  <div :data-aaa="{
+    type: 'type_a',
+    name: 'name_a',
+    desc: 'desc_a',
   }">
-    <p :data-jt-sender="{
-      type: 'clickAndSpm',
-      event_type: 'click',
-      block_desc: 'articleLibrarySearch',
-      button_desc: 'enter_btn',
+    <p :data-bbb="{
+      type: 'type_b',
+      name: 'name_b',
+      desc: 'desc_b',
     }">
       another
     </p>

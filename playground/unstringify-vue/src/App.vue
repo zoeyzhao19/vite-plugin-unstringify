@@ -4,17 +4,15 @@ import Another from './another.vue'
 </script>
 
 <template>
-  <div :data-aaa-sender="{
-    type: 'clickAndSpm',
-    event_type: 'click',
-    block_desc: 'articleLibrarySearch',
-    button_desc: 'enter_btn',
+  <div :data-aaa="{
+    type: 'type_a',
+    name: 'name_a',
+    desc: 'desc_a',
   }">
-    <p :data-bbb-sender="{
-      type: 'clickAndSpm',
-      event_type: 'click',
-      block_desc: 'articleLibrarySearch',
-      button_desc: 'enter_btn',
+    <p :data-bbb="{
+      type: 'type_b',
+      name: 'name_b',
+      desc: 'desc_b',
     }">
       auto stringify
     </p>
