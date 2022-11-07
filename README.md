@@ -6,3 +6,4 @@ Since it does not seem to be elegant to always wrap `JSON.stringify` on your [do
 
 - [x] Support direct variables assignment in SFC/JSX
 - [ ] Support variables reference in SFC/JSX
+- [ ] Support glob pattern
