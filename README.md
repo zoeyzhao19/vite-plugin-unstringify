@@ -10,4 +10,4 @@ Since it does not seem to be elegant to always wrap `JSON.stringify` on your [do
 
 ### **Behavior**
 
-![preview img](https://raw.githubusercontent.com/zoeyzhao19/vite-plugin-unstringify/master/playground/public/preview.jpg)
+![preview img](https://raw.githubusercontent.com/zoeyzhao19/vite-plugin-unstringify/master/playground/public/preview2.jpg)
