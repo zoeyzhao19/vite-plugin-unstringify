@@ -4,21 +4,20 @@ import Another from './another.vue'
 </script>
 
 <template>
-  <div :data-jt-sender="{
+  <div :data-aaa-sender="{
     type: 'clickAndSpm',
     event_type: 'click',
     block_desc: 'articleLibrarySearch',
     button_desc: 'enter_btn',
   }">
-    <p :data-dddd="{
+    <p :data-bbb-sender="{
       type: 'clickAndSpm',
       event_type: 'click',
       block_desc: 'articleLibrarySearch',
       button_desc: 'enter_btn',
     }">
-      <Another></Another>
+      auto stringify
     </p>
-    <TestTsx></TestTsx>
   </div>
 </template>
 
