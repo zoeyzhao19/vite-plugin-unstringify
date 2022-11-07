@@ -8,7 +8,25 @@ export default function TestTsx() {
         button_desc: 'enter_btn',
       }}
     >
-      323232
+      <p
+        data-dddd={{
+          type: 'clickAndSpm',
+          event_type: 'click',
+          block_desc: 'articleLibrarySearch',
+          button_desc: 'enter_btn',
+        }}
+      >
+        <span
+          data-aaa={{
+            type: 'clickAndSpm',
+            event_type: 'click',
+            block_desc: 'articleLibrarySearch',
+            button_desc: 'enter_btn',
+          }}
+        >
+          jsx
+        </span>
+      </p>
     </div>
   );
 }

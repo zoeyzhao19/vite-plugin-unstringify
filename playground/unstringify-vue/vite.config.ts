@@ -6,5 +6,10 @@ import vueJsx from '@vitejs/plugin-vue-jsx';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [unstringify('data-jt-sender'), vue(), vueJsx(), inspect()],
+  plugins: [
+    unstringify(['data-jt-sender', 'data-dddd']),
+    vue(),
+    vueJsx(),
+    inspect(),
+  ],
 });

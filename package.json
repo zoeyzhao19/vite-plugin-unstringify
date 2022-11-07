@@ -1,7 +1,7 @@
 {
   "name": "vite-plugin-unstringify",
   "version": "0.3.2",
-  "description": "auto unstringify dom data-* or other dom attributes",
+  "description": "auto unstringify dom data-* mainly or other dom attributes",
   "repository": {
     "type": "git",
     "url": "https://github.com/zoeyzhao19/vite-plugin-unstringify"
@@ -17,7 +17,7 @@
     "bump": "bump --commit --tag --push"
   },
   "keywords": [
-    "auto unstringify dom data-* or other dom attributes"
+    "auto unstringify dom data-* mainly or other dom attributes"
   ],
   "author": "",
   "license": "ISC",
@@ -38,7 +38,6 @@
     "rimraf": "^3.0.2",
     "typescript": "^4.8.2",
     "unbuild": "^0.8.9",
-    "vite": "^3.2.0",
     "vitest": "^0.22.1"
   },
   "packageManager": "pnpm@7.9.0",

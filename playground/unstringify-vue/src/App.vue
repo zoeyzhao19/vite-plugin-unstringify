@@ -1,17 +1,23 @@
 <script setup lang="ts">
 import TestTsx from './test';
+import Another from './another.vue'
 </script>
 
 <template>
-  <div
-    :data-jt-sender="{
+  <div :data-jt-sender="{
+    type: 'clickAndSpm',
+    event_type: 'click',
+    block_desc: 'articleLibrarySearch',
+    button_desc: 'enter_btn',
+  }">
+    <p :data-dddd="{
       type: 'clickAndSpm',
       event_type: 'click',
       block_desc: 'articleLibrarySearch',
       button_desc: 'enter_btn',
-    }"
-  >
-    Data stringify map
+    }">
+      <Another></Another>
+    </p>
     <TestTsx></TestTsx>
   </div>
 </template>
@@ -22,9 +28,11 @@ import TestTsx from './test';
   padding: 1.5em;
   will-change: filter;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
 }
