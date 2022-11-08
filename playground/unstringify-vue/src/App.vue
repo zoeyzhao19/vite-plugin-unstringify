@@ -14,7 +14,7 @@ import Another from './another.vue'
       name: 'name_b',
       desc: 'desc_b',
     }">
-      auto stringify
+      <TestTsx></TestTsx>
     </p>
   </div>
 </template>

@@ -1,6 +1,11 @@
 import MagicString from 'magic-string';
+import { ensureNonGreedy, vueKeyRe, jsxKeyRe } from './utils';
 
-export default function unstringify(dataKey: string | string[]): {
+const vueKeyREMap = new Map();
+const jsxKeyREMap = new Map();
+const DATA_KEY_RE = 'DATA_KEY_RE';
+
+export default function unstringify(dataKey: RegExp | string | string[]): {
   name: string;
   enforce?: 'pre' | 'post';
   transform(
@@ -8,16 +13,17 @@ export default function unstringify(dataKey: string | string[]): {
     id: string
   ): { code: string; map: any } | null | string;
 } {
-  const newDataKey = Array.isArray(dataKey) ? dataKey : [dataKey];
-  const vueKeyREMap = new Map();
-  const jsxKeyREMap = new Map();
-  newDataKey.forEach((key, index) => {
-    vueKeyREMap.set(
-      index,
-      new RegExp(`:${key}=["']\\{([\\s\\S]+?)}[\\s]*["']`)
-    );
-    jsxKeyREMap.set(index, new RegExp(`${key}={{([\\s\\S]+?)}}`));
-  });
+  if (Object.prototype.toString.call(dataKey) === '[object RegExp]') {
+    const dateKeyStr = ensureNonGreedy(dataKey.toString().slice(1, -1));
+    vueKeyREMap.set(DATA_KEY_RE, vueKeyRe(dateKeyStr, true));
+    jsxKeyREMap.set(DATA_KEY_RE, jsxKeyRe(dateKeyStr, true));
+  } else {
+    const tempDateKeys = Array.isArray(dataKey) ? dataKey : [dataKey];
+    tempDateKeys.forEach((key, index) => {
+      vueKeyREMap.set(index, vueKeyRe(key as string));
+      jsxKeyREMap.set(index, jsxKeyRe(key as string));
+    });
+  }
 
   return {
     name: 'vite-plugin-unstringify',
@@ -25,20 +31,23 @@ export default function unstringify(dataKey: string | string[]): {
     transform(code: string, id: string) {
       if (id.endsWith('vue')) {
         const s = new MagicString(code);
-        for (const [index, vueKeyRE] of vueKeyREMap) {
-          const matches = vueKeyRE.exec(code);
-          if (matches && matches[1]) {
-            s.overwrite(
-              matches['index'] + newDataKey[index].length + 3,
-              matches['index'] +
-                newDataKey[index].length +
-                3 +
-                matches[1].length +
-                2,
-              `JSON.stringify({${matches[1]}})`
-            );
-            vueKeyRE.lastIndex = 0;
+        for (const [, vueKeyRE] of vueKeyREMap) {
+          while (true) {
+            const matches = vueKeyRE.exec(code);
+            if (!matches) break;
+            if (matches && matches[1] && matches[2]) {
+              s.overwrite(
+                matches['index'] + matches[1].length + 3,
+                matches['index'] +
+                  matches[1].length +
+                  3 +
+                  matches[2].length +
+                  2,
+                `JSON.stringify({${matches[2]}})`
+              );
+            }
           }
+          vueKeyRE.lastIndex = 0;
         }
         return {
           code: s.toString(),
@@ -46,21 +55,23 @@ export default function unstringify(dataKey: string | string[]): {
         };
       } else if (id.endsWith('jsx') || id.endsWith('tsx')) {
         const s = new MagicString(code);
-        for (const [index, jsxKeyRE] of jsxKeyREMap) {
-          console.log({ jsxKeyRE });
-          const matches = jsxKeyRE.exec(code);
-          if (matches && matches[1]) {
-            s.overwrite(
-              matches['index'] + newDataKey[index].length + 2,
-              matches['index'] +
-                newDataKey[index].length +
-                2 +
-                matches[1].length +
-                2,
-              `JSON.stringify({${matches[1]}})`
-            );
-            jsxKeyRE.lastIndex = 0;
+        for (const [, jsxKeyRE] of jsxKeyREMap) {
+          while (true) {
+            const matches = jsxKeyRE.exec(code);
+            if (!matches) break;
+            if (matches && matches[1] && matches[2]) {
+              s.overwrite(
+                matches['index'] + matches[1].length + 2,
+                matches['index'] +
+                  matches[1].length +
+                  2 +
+                  matches[2].length +
+                  2,
+                `JSON.stringify({${matches[2]}})`
+              );
+            }
           }
+          jsxKeyRE.lastIndex = 0;
         }
 
         return {
