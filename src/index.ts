@@ -1,9 +1,8 @@
-import MagicString from 'magic-string';
-import { ensureNonGreedy, vueKeyRe, jsxKeyRe } from './utils';
+import { removeGreedySymbol, vueKeyRe, jsxKeyRe } from './utils';
+import { transformVueKey, transformJsxKey } from './transform';
 
-const vueKeyREMap = new Map();
-const jsxKeyREMap = new Map();
-const DATA_KEY_RE = 'DATA_KEY_RE';
+const vueKeyREMap = new Map<string | number, RegExp>();
+const jsxKeyREMap = new Map<string | number, RegExp>();
 
 export default function unstringify(dataKey: RegExp | string | string[]): {
   name: string;
@@ -14,9 +13,9 @@ export default function unstringify(dataKey: RegExp | string | string[]): {
   ): { code: string; map: any } | null | string;
 } {
   if (Object.prototype.toString.call(dataKey) === '[object RegExp]') {
-    const dateKeyStr = ensureNonGreedy(dataKey.toString().slice(1, -1));
-    vueKeyREMap.set(DATA_KEY_RE, vueKeyRe(dateKeyStr, true));
-    jsxKeyREMap.set(DATA_KEY_RE, jsxKeyRe(dateKeyStr, true));
+    const dataKeyStr = removeGreedySymbol(dataKey.toString().slice(1, -1));
+    vueKeyREMap.set(0, vueKeyRe(`${dataKeyStr}+?`));
+    jsxKeyREMap.set(0, jsxKeyRe(`${dataKeyStr}+?`));
   } else {
     const tempDateKeys = Array.isArray(dataKey) ? dataKey : [dataKey];
     tempDateKeys.forEach((key, index) => {
@@ -29,58 +28,14 @@ export default function unstringify(dataKey: RegExp | string | string[]): {
     name: 'vite-plugin-unstringify',
     enforce: 'pre',
     transform(code: string, id: string) {
+      let result;
       if (id.endsWith('vue')) {
-        const s = new MagicString(code);
-        for (const [, vueKeyRE] of vueKeyREMap) {
-          while (true) {
-            const matches = vueKeyRE.exec(code);
-            if (!matches) break;
-            if (matches && matches[1] && matches[2]) {
-              s.overwrite(
-                matches['index'] + matches[1].length + 3,
-                matches['index'] +
-                  matches[1].length +
-                  3 +
-                  matches[2].length +
-                  2,
-                `JSON.stringify({${matches[2]}})`
-              );
-            }
-          }
-          vueKeyRE.lastIndex = 0;
-        }
-        return {
-          code: s.toString(),
-          map: s.generateMap(),
-        };
+        result = transformVueKey(code, vueKeyREMap);
       } else if (id.endsWith('jsx') || id.endsWith('tsx')) {
-        const s = new MagicString(code);
-        for (const [, jsxKeyRE] of jsxKeyREMap) {
-          while (true) {
-            const matches = jsxKeyRE.exec(code);
-            if (!matches) break;
-            if (matches && matches[1] && matches[2]) {
-              s.overwrite(
-                matches['index'] + matches[1].length + 2,
-                matches['index'] +
-                  matches[1].length +
-                  2 +
-                  matches[2].length +
-                  2,
-                `JSON.stringify({${matches[2]}})`
-              );
-            }
-          }
-          jsxKeyRE.lastIndex = 0;
-        }
-
-        return {
-          code: s.toString(),
-          map: s.generateMap(),
-        };
+        result = transformJsxKey(code, jsxKeyREMap);
       }
 
-      return null;
+      return result ?? null;
     },
   };
 }
