@@ -1,0 +1,81 @@
+// Vitest Snapshot v1
+
+exports[`transformJsxKey > vueKeyREMap value is regExp 1`] = `
+"<div :data-aaa=\\"JSON.stringify({
+    type: 'type_a',
+    name: 'name_a',
+    desc: 'desc_a',
+  })\\">
+    <p :data-bbb=\\"JSON.stringify({
+      type: 'type_b',
+      name: 'name_b',
+      desc: 'desc_b',
+    })\\">
+    </p>
+  </div>"
+`;
+
+exports[`transformJsxKey > when key is regExp 1`] = `
+"<div
+  data-aaa={{JSON.stringify({
+    type: 'type_a',
+    name: 'name_a',
+    desc: 'desc_a',
+  })
+>
+  <p
+    data-bbb={{JSON.stringify({
+      type: 'type_b',
+      name: 'name_b',
+      desc: 'desc_b',
+    })
+  >
+    jsx
+  </p>
+</div>"
+`;
+
+exports[`transformVueKey > vueKeyREMap value is regExp 1`] = `
+"<div :data-aaa=\\"JSON.stringify({
+    type: 'type_a',
+    name: 'name_a',
+    desc: 'desc_a',
+  })\\">
+    <p :data-bbb=\\"JSON.stringify({
+      type: 'type_b',
+      name: 'name_b',
+      desc: 'desc_b',
+    })\\">
+    </p>
+  </div>"
+`;
+
+exports[`transformVueKey > vueKeyREMap value is string 1`] = `
+"<div :data-aaa=\\"JSON.stringify({
+    type: 'type_a',
+    name: 'name_a',
+    desc: 'desc_a',
+  })\\">
+    <p :data-bbb=\\"JSON.stringify({
+      type: 'type_b',
+      name: 'name_b',
+      desc: 'desc_b',
+    })\\">
+    </p>
+  </div>"
+`;
+
+exports[`transformVueKey > when key is regExp 1`] = `
+"<div :data-aaa=\\"JSON.stringify({
+    type: 'type_a',
+    name: 'name_a',
+    desc: 'desc_a',
+  })\\">
+    <p :data-bbb=\\"JSON.stringify({
+      type: 'type_b',
+      name: 'name_b',
+      desc: 'desc_b',
+    })\\">
+    </p>
+  </div>"
+`;
