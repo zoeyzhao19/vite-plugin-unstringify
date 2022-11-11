@@ -14,13 +14,6 @@ export function resolveDataKey(rawStr: string, isEntry = true): string {
   return rawStr;
 }
 
-export const generateKeyFromRe = (rawStr: string) => {
-  const greedyRE = /[^\\][*+]$/;
-  if (greedyRE.test(rawStr)) {
-    return rawStr.slice(0, -1);
-  }
-};
-
 export function vueKeyRe(rawStr: string) {
   return new RegExp(`:(${rawStr})=["']\\{([\\s\\S]+?)}[\\s]*["']`, 'g');
 }
