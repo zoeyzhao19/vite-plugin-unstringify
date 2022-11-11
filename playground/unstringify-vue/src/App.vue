@@ -4,7 +4,7 @@ import Another from './another.vue'
 </script>
 
 <template>
-  <div :data-aaa="{
+  <div :data-aaac="{
     type: 'type_a',
     name: 'name_a',
     desc: 'desc_a',

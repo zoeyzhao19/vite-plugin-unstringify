@@ -1,25 +1,5 @@
 // Vitest Snapshot v1
 
-exports[`transformJsxKey > jsxKeyREMap value is string 1`] = `
-"<div
-  data-aaa={JSON.stringify({
-    type: 'type_a',
-    name: 'name_a',
-    desc: 'desc_a',
-  })}
->
-  <p
-    data-bbb={JSON.stringify({
-      type: 'type_b',
-      name: 'name_b',
-      desc: 'desc_b',
-    })}
-  >
-    jsx
-  </p>
-</div>"
-`;
-
 exports[`transformJsxKey > when key is string 1`] = `
 "<div
   data-aaa={JSON.stringify({
@@ -38,21 +18,6 @@ exports[`transformJsxKey > when key is string 1`] = `
     jsx
   </p>
 </div>"
-`;
-
-exports[`transformVueKey > vueKeyREMap value is string 1`] = `
-"<div :data-aaa=\\"JSON.stringify({
-    type: 'type_a',
-    name: 'name_a',
-    desc: 'desc_a',
-  })\\">
-    <p :data-bbb=\\"JSON.stringify({
-      type: 'type_b',
-      name: 'name_b',
-      desc: 'desc_b',
-    })\\">
-    </p>
-  </div>"
 `;
 
 exports[`transformVueKey > when key is string 1`] = `

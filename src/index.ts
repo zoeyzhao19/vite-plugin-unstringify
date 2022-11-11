@@ -1,4 +1,4 @@
-import { removeGreedySymbol, vueKeyRe, jsxKeyRe } from './utils';
+import { resolveDataKey, vueKeyRe, jsxKeyRe } from './utils';
 import { transformVueKey, transformJsxKey } from './transform';
 
 const vueKeyREMap = new Map<string | number, RegExp>();
@@ -13,9 +13,9 @@ export default function unstringify(dataKey: RegExp | string | string[]): {
   ): { code: string; map: any } | null | string;
 } {
   if (Object.prototype.toString.call(dataKey) === '[object RegExp]') {
-    const dataKeyStr = removeGreedySymbol(dataKey.toString().slice(1, -1));
-    vueKeyREMap.set(0, vueKeyRe(`${dataKeyStr}+?`));
-    jsxKeyREMap.set(0, jsxKeyRe(`${dataKeyStr}+?`));
+    const dataKeyStr = resolveDataKey(dataKey.toString().slice(1, -1));
+    vueKeyREMap.set(0, vueKeyRe(`${dataKeyStr}`));
+    jsxKeyREMap.set(0, jsxKeyRe(`${dataKeyStr}`));
   } else {
     const tempDateKeys = Array.isArray(dataKey) ? dataKey : [dataKey];
     tempDateKeys.forEach((key, index) => {

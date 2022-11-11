@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest';
-import { vueKeyRe, jsxKeyRe, removeGreedySymbol } from '../src/utils';
+import { vueKeyRe, jsxKeyRe, resolveDataKey } from '../src/utils';
 import { transformVueKey, transformJsxKey } from '../src/transform';
 
 describe('transformVueKey', () => {
@@ -18,8 +18,8 @@ describe('transformVueKey', () => {
   test('when key is regExp', () => {
     const vueKeyREMap = new Map();
     const dataKey = /data-.+/;
-    const dataKeyStr = removeGreedySymbol(dataKey.toString().slice(1, -1));
-    vueKeyREMap.set(0, vueKeyRe(`${dataKeyStr}+?`));
+    const dataKeyStr = resolveDataKey(dataKey.toString().slice(1, -1));
+    vueKeyREMap.set(0, vueKeyRe(`${dataKeyStr}`));
 
     expect(transformVueKey(code, vueKeyREMap)?.code).toMatchSnapshot();
   });
@@ -46,8 +46,8 @@ describe('transformJsxKey', () => {
   test('when key is regExp', () => {
     const jsxKeyREMap = new Map();
     const dataKey = /data-.+/;
-    const dataKeyStr = removeGreedySymbol(dataKey.toString().slice(1, -1));
-    jsxKeyREMap.set(0, jsxKeyRe(`${dataKeyStr}+?`));
+    const dataKeyStr = resolveDataKey(dataKey.toString().slice(1, -1));
+    jsxKeyREMap.set(0, jsxKeyRe(`${dataKeyStr}`));
 
     expect(transformVueKey(code, jsxKeyREMap)?.code).toMatchSnapshot();
   });

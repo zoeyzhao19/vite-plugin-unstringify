@@ -2,10 +2,14 @@ export function escapeRegExp(str: string) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-export function removeGreedySymbol(rawStr: string) {
-  const greedyRE = /[^\\][*+]$/;
+export function resolveDataKey(rawStr: string, isEntry = true): string {
+  if (isEntry) {
+    rawStr = rawStr.startsWith('^') ? rawStr.slice(1) : rawStr;
+    rawStr = rawStr.endsWith('$') ? rawStr.slice(0, -1) : rawStr;
+  }
+  const greedyRE = /[^\\][?]$/;
   if (greedyRE.test(rawStr)) {
-    return rawStr.slice(0, -1);
+    return resolveDataKey(rawStr.slice(0, -1), false);
   }
   return rawStr;
 }
@@ -15,7 +19,6 @@ export const generateKeyFromRe = (rawStr: string) => {
   if (greedyRE.test(rawStr)) {
     return rawStr.slice(0, -1);
   }
-  // const endRE = /[[\]]*\$$/;
 };
 
 export function vueKeyRe(rawStr: string) {
