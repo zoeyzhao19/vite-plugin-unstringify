@@ -4,12 +4,12 @@ import Another from './another.vue'
 </script>
 
 <template>
-  <div :data-aaac="{
+  <div :data-aaa="{
     type: 'type_a',
     name: 'name_a',
     desc: 'desc_a',
   }">
-    <p :data-bbb="{
+    <p data-bbb="{
       type: 'type_b',
       name: 'name_b',
       desc: 'desc_b',

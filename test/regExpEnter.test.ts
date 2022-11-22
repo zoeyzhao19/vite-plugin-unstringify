@@ -1,6 +1,7 @@
 import { describe, test, expect } from 'vitest';
-import { vueKeyRe, jsxKeyRe, resolveDataKey } from '../src/utils';
+import { vueKeyRe, jsxKeyRe } from '../src/utils';
 import { transformVueKey, transformJsxKey } from '../src/transform';
+import { resolveDataKey } from '../src/resolveKey';
 
 describe('transformVueKey', () => {
   const code = `<div :data-aaa="{
@@ -18,8 +19,8 @@ describe('transformVueKey', () => {
   test('when key is regExp', () => {
     const vueKeyREMap = new Map();
     const dataKey = /data-.+/;
-    const dataKeyStr = resolveDataKey(dataKey.toString().slice(1, -1));
-    vueKeyREMap.set(0, vueKeyRe(`${dataKeyStr}`));
+    const keys = resolveDataKey(dataKey);
+    keys.map((item, index) => vueKeyREMap.set(index, vueKeyRe(`${item}`)));
 
     expect(transformVueKey(code, vueKeyREMap)?.code).toMatchSnapshot();
   });
@@ -46,9 +47,9 @@ describe('transformJsxKey', () => {
   test('when key is regExp', () => {
     const jsxKeyREMap = new Map();
     const dataKey = /data-.+/;
-    const dataKeyStr = resolveDataKey(dataKey.toString().slice(1, -1));
-    jsxKeyREMap.set(0, jsxKeyRe(`${dataKeyStr}`));
+    const keys = resolveDataKey(dataKey);
+    keys.map((item, index) => jsxKeyREMap.set(index, jsxKeyRe(`${item}`)));
 
-    expect(transformVueKey(code, jsxKeyREMap)?.code).toMatchSnapshot();
+    expect(transformJsxKey(code, jsxKeyREMap)?.code).toMatchSnapshot();
   });
 });

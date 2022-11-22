@@ -2,18 +2,18 @@
 
 exports[`transformJsxKey > when key is regExp 1`] = `
 "<div
-  data-aaa={{JSON.stringify({
+  data-aaa={JSON.stringify({
     type: 'type_a',
     name: 'name_a',
     desc: 'desc_a',
-  })
+  })}
 >
   <p
-    data-bbb={{JSON.stringify({
+    data-bbb={JSON.stringify({
       type: 'type_b',
       name: 'name_b',
       desc: 'desc_b',
-    })
+    })}
   >
     jsx
   </p>

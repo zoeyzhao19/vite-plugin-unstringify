@@ -1,5 +1,6 @@
-import { resolveDataKey, vueKeyRe, jsxKeyRe } from './utils';
+import { vueKeyRe, jsxKeyRe } from './utils';
 import { transformVueKey, transformJsxKey } from './transform';
+import { resolveDataKey } from './resolveKey';
 
 const vueKeyREMap = new Map<string | number, RegExp>();
 const jsxKeyREMap = new Map<string | number, RegExp>();
@@ -12,17 +13,11 @@ export default function unstringify(dataKey: RegExp | string | string[]): {
     id: string
   ): { code: string; map: any } | null | string;
 } {
-  if (Object.prototype.toString.call(dataKey) === '[object RegExp]') {
-    const dataKeyStr = resolveDataKey(dataKey.toString().slice(1, -1));
-    vueKeyREMap.set(0, vueKeyRe(`${dataKeyStr}`));
-    jsxKeyREMap.set(0, jsxKeyRe(`${dataKeyStr}`));
-  } else {
-    const tempDateKeys = Array.isArray(dataKey) ? dataKey : [dataKey];
-    tempDateKeys.forEach((key, index) => {
-      vueKeyREMap.set(index, vueKeyRe(key as string));
-      jsxKeyREMap.set(index, jsxKeyRe(key as string));
-    });
-  }
+  const tempDataKeys = resolveDataKey(dataKey);
+  tempDataKeys.forEach((key, index) => {
+    vueKeyREMap.set(index, vueKeyRe(key as string));
+    jsxKeyREMap.set(index, jsxKeyRe(key as string));
+  });
 
   return {
     name: 'vite-plugin-unstringify',
