@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-unstringify",
-  "version": "0.3.7",
+  "version": "0.3.8",
   "description": "auto unstringify dom data-* mainly or other dom attributes",
   "repository": {
     "type": "git",
