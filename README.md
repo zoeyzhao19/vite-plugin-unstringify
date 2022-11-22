@@ -7,6 +7,20 @@ Since it does not seem to be elegant to always wrap `JSON.stringify` on your [do
 - [ ] Support variables reference in SFC/JSX
 - [x] Support `RegExp/Specific keys` config
 
+## Installation
+
+```bash
+npm i -D vite-plugin-unstringify
+```
+
+```ts
+import unstringify from 'vite-plugin-unstringify';
+
+export default defineConfig({
+  plugins: [unstringify(/data-.+/)],
+});
+```
+
 ### **Behavior**
 
 ![preview img](https://raw.githubusercontent.com/zoeyzhao19/vite-plugin-unstringify/master/playground/public/preview.jpg)
